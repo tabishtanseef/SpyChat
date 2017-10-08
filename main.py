@@ -3,38 +3,84 @@ print 'Hello'
 print 'Let\'s get started'
 
 STATUS_MESSAGE = ['Status1', 'I m in class', 'spy is enjoying ']
+friends_name = []
+friends_age = []
+friends_rating = []
+friends_is_online = []
 
-def add_status(status_message):
+def add_status(current_status_message):
 
-    if status_message != None:
-        print 'Your Current status is' + status_message
+    if current_status_message != None:
+        print 'Your Current status is ' + current_status_message
     else:
         print 'You don\'t have a status '
 
     ques = raw_input('Do you want to select from the old status? Y\N ')
+
     if ques.upper() == 'N':
         new_status = raw_input('Enter Your new status: ')
+
         if len(new_status) > 0:
             STATUS_MESSAGE.append(new_status)
+            print 'Your Current status is ' + new_status
+
     elif ques.upper()== 'Y':
+
         item_position = 1
+
         for messages in STATUS_MESSAGE:
             print str(item_position) + '. ' + messages
             item_position = item_position + 1
+
         message_selection = input('Choose from the above status ')
+
         if len(STATUS_MESSAGE) >= message_selection:
             updated_status_message = STATUS_MESSAGE[message_selection - 1]
-            return updated_status_message
+
+    else:
+        print 'The option you choose is not valid. Either enter Y or N'
+
+
+    if updated_status_message:
+        print 'Your Updated status is ' + updated_status_message
+
+    return updated_status_message
+
+
+def add_friend():
+    new_name = raw_input("Please add your friend's name:")
+    new_salutation = raw_input("Are they Mr. or Ms.?: ")
+    new_name = new_name + " " + new_salutation
+    new_age = input("Age?")
+    new_rating = input("Spy rating?")
+
+    if len(new_name) > 0 and new_age > 12 and new_rating >= spy_rating:
+        friends_name.append(new_name)
+        friends_age.append(new_age)
+        friends_rating.append(new_rating)
+        friends_status.append(True)
+
+    else:
+        print 'Sorry! Invalid entry. We can\'t add spy with the details you provided'
+
+    return len(friends_name)
 
 
 def start_chat(spy_name, spy_age, spy_rating):
+
     show_menu = True
-    status_message = None
+
+    current_status_message = None
+
     while show_menu:
-        menu_choice = input('What do you want to do? \n 1. Add a status. \n 2. Exit Application')
+        menu_choice = input('What do you want to do? \n 1. Add a status. \n 2. Add a friend. \n 3. Exit Application')
         if menu_choice==1:
             print 'Update Your status'
+            current_status_message = add_status(current_status_message)
         elif menu_choice==2:
+            number_of_friends = add_friend()
+            print 'you have %d friends ' % (number_of_friends)
+        else:
             show_menu = False
 
 
