@@ -61,6 +61,20 @@ def add_friend():
 
     return len(friends)
 
+def select_friend:
+  item_number = 1
+
+  for friend in friends:
+    print '%d. %s' % (item_number), friend['name']
+
+    item_number = item_number + 1
+
+  friend_choice = input("Choose from your friends")
+  friend_choice_position = friend_choice - 1
+  return friend_choice_position
+
+def send_message():
+    friend_choice = select_friend()
 
 def start_chat(spy):
 
@@ -69,7 +83,7 @@ def start_chat(spy):
     current_status_message = None
 
     while show_menu:
-        menu_choice = input('What do you want to do? \n 1. Add a status. \n 2. Add a friend. \n 3. Exit Application')
+        menu_choice = input('What do you want to do? \n 1. Add a status. \n 2. Add a friend. \n 3. Send Message \n 4. Read Message\n  5.Exit Application')
         if menu_choice==1:
             print 'Update Your status'
             current_status_message = add_status(current_status_message)
@@ -78,6 +92,10 @@ def start_chat(spy):
         elif menu_choice==2:
             number_of_friends = add_friend()
             print 'you have %d friends ' % (number_of_friends)
+        elif menu_choice==3:
+            send_message()
+        elif menu_choice==4:
+            read_message()
         else:
             show_menu = False
 
