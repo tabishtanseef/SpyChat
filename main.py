@@ -1,4 +1,6 @@
 from spy_details import spy
+from steganography.steganography import Steganography
+from datetime import datetime
 print 'Hello'
 print 'Let\'s get started'
 
@@ -47,6 +49,7 @@ def add_friend():
         'salutation' : '',
         'age' : 0,
         'rating' : 0.0,
+        'chats' : []
     }
     new_friend['name'] = raw_input("Please add your friend's name: ")
     new_friend['salutation'] = raw_input("Are they Mr. or Ms.?: ")
@@ -61,11 +64,11 @@ def add_friend():
 
     return len(friends)
 
-def select_friend:
+def select_friend():
   item_number = 1
 
   for friend in friends:
-    print '%d. %s' % (item_number), friend['name']
+    print '%d. %s' % (item_number, friend['name'])
 
     item_number = item_number + 1
 
@@ -75,6 +78,30 @@ def select_friend:
 
 def send_message():
     friend_choice = select_friend()
+    original_image = raw_input("what is your original image? ")
+    output_path = 'output.jpg'
+    text = raw_input("What do you want to say? ")
+    text = Steganography.encode(original_image, output_path, text)
+    new_chat = {
+        "message": text,
+        "time": datetime.now(),
+        "sent_by_me": True
+    }
+    friends[friend_choice]['chats'].append(new_chat)
+    print "Your secret message is ready!"
+
+def read_message():
+    sender = select_friend()
+    output_path = raw_input("What is the output path? ")
+    secret_text = Steganography.decode(output_path)
+    new_chat = {
+        "message": secret_text,
+        "time": datetime.now(),
+        "sent_by_me": False
+    }
+
+    friends[sender]['chats'].append(new_chat)
+    print "Your secret message has been saved!"
 
 def start_chat(spy):
 
@@ -83,7 +110,7 @@ def start_chat(spy):
     current_status_message = None
 
     while show_menu:
-        menu_choice = input('What do you want to do? \n 1. Add a status. \n 2. Add a friend. \n 3. Send Message \n 4. Read Message\n  5.Exit Application')
+        menu_choice = input('What do you want to do? \n 1. Add a status. \n 2. Add a friend. \n 3. Send Message \n 4. Read Message\n 5.Exit Application')
         if menu_choice==1:
             print 'Update Your status'
             current_status_message = add_status(current_status_message)
