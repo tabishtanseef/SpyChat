@@ -101,6 +101,7 @@ def read_message():
     }
 
     friends[sender]['chats'].append(new_chat)
+    print "Your secret message is " + secret_text
     print "Your secret message has been saved!"
 
 def start_chat(spy):
