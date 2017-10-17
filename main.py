@@ -116,7 +116,7 @@ def start_chat(spy):
             print 'Update Your status'
             current_status_message = add_status(current_status_message)
             if current_status_message:
-                print 'Updated status message is ' + current_status_message
+                print 'Your Updated status message is ' + current_status_message
         elif menu_choice==2:
             number_of_friends = add_friend()
             print 'you have %d friends ' % (number_of_friends)
